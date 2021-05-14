@@ -1,0 +1,1334 @@
+\documentclass[a4paper]{ctexart}    %文类(论文)
+%目录层级
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+% 宏包
+\usepackage{ctex}              	%支持中文
+\usepackage{amsmath}           	%数学公式
+\usepackage{amssymb}
+\usepackage{graphicx}          	%插图
+\usepackage{listings}          	%插入代码
+\usepackage{color, xcolor}     	%颜色
+\usepackage{longtable, booktabs}	%三线表
+\usepackage{pdfpages}			%导入pdf
+\usepackage{titlesec}			%设置标题、子标题
+\usepackage{subfigure}			%子图
+\usepackage{tcolorbox}			%彩色盒子
+\usepackage{multirow}			%不规则表格
+
+%页边距调整
+\usepackage[left=2.54cm, bottom=3.18cm, right=2.54cm, top=3.18cm]{geometry}
+\usepackage{fancyhdr}    		%页面样式
+\pagestyle{fancy}    			%fancy页面样式
+
+%页眉页脚
+\fancyhead[r]{\textbf{贤妃的数学笔记}}
+\fancyfoot[r]{\textbf{cg系统数理统计作业}}
+%标题
+\title{\textbf{Statistics Note}}
+\author{by xianfei}
+\date{}
+
+\begin{document}
+	\maketitle
+	\noindent
+	\thispagestyle{empty}
+	\begin{table}[htbp!]
+		\centering
+		\begin{tabular}{c}
+			\Large Last math class, my younth ends!
+		\end{tabular}
+	\end{table}
+	\newpage
+	\thispagestyle{empty}
+	\tableofcontents
+	\begin{figure}[htbp!]
+		\centering
+		\includegraphics{huaji1.png}
+	\end{figure}
+	\newpage
+	\section{特征函数作业}
+	\noindent
+	\begin{tcolorbox}
+		[colframe=blue!25,
+		colback=blue!10,
+		coltitle=blue!20!black,  
+		fonttitle=\bfseries,
+		adjusted title=Formula Or Theorem:
+		]
+		\begin{itemize}
+			\item \textbf{定义 4.2.1(P193)} 设$ X $是一个随机变量，称
+			\begin{equation*}
+				\varphi(t) = E(e^{itX}), \qquad -\infty < t < +\infty
+			\end{equation*}
+			为$ X $的\textbf{特征函数}
+			\item \textbf{性质4.2.3(P194)} 若$ Y = aX + b $，其中$ a $，$ b $是常数，则
+			\begin{equation*}
+				\varphi_{Y}(t) = e^{ibt}\varphi_{X} (at)
+			\end{equation*}
+			\item \textbf{性质4.2.4(P194)} 独立随机变量和的特征函数为每个随机变量的特征函数的积，即设$ X $与$ Y $相互独立，则
+			\begin{equation*}
+				\varphi_{X+Y}(t) = \varphi_{X}(t)\varphi_{Y}(t)
+			\end{equation*}
+			\item \textbf{性质4.2.5(P194)} 若$ E(X^{l}) $存在，则$ X $的特征函数$ \varphi(t) $可$ l $次求导，且对$ 1 \leq k \leq l $，有
+			\begin{equation*}
+				\varphi^{(k)}(0) = i^kE(X^k)
+			\end{equation*}
+			特别地
+			\begin{equation*}
+				E(X) = \frac{\varphi'(0)}{i} \quad , \quad Var(X) = -\varphi''(0) + (\varphi'(0))^2
+			\end{equation*}
+		\end{itemize}
+	\end{tcolorbox}
+	\noindent
+	1.1 \\
+	由定义4.2.1得
+	\begin{equation*}
+		\begin{split}
+			\varphi (t) & = E(e^{itx_k}) = \sum\limits_{k=0}^{3} e^{itk}p_k\\
+			& = 0.1\cdot e^{3it} + 0.2\cdot e^{2it} + 0.3\cdot e^{it} + 0.4
+		\end{split}
+	\end{equation*}
+	\\
+	1.2 \\
+	由定义4.2.1得
+	\begin{equation}
+		\varphi (t) = E(e^{itx_k}) = \sum\limits_{k=1}^{\infty} e^{itk} \cdot p(1-p)^{k-1}
+		= pe^{it}\sum\limits_{k=1}^{\infty}\left[e^{it}(1-p)\right]^{k-1}\tag{$*$}
+	\end{equation}
+	式$(*)$中，$\left|e^{it}(1-p)\right| \leq \left|e^{it}\right| \cdot \left|(1-p)\right| < 1$得
+	\begin{equation*}
+		\varphi (t) = \frac{pe^{it}}{1-e^{it}(1-p)}
+	\end{equation*}
+	即得
+	\begin{equation*}
+		\begin{split}
+			\varphi^{'}(t) = \frac{ipe^{it}}{(1-e^{it}(1-p))^2}\qquad\qquad
+			\varphi^{''}(t) = \frac{-pe^{it}(1+e^{it}(1-p))}{(1-e^{it}(1-p))^3}
+		\end{split}
+	\end{equation*}
+	由性质4.2.5得数学期望、方差
+	\begin{equation*}
+		\begin{split}
+			E(X) &= \frac{\varphi^{'}(0)}{i} = \frac{1}{p} \\
+			Var(X) &= -\varphi^{''}(0) + (\varphi^{'}(0))^2 = \frac{1-p}{p^2}
+		\end{split}
+	\end{equation*}
+	\section{大数定律与中心极限定理作业}
+	\begin{tcolorbox}
+		[colframe=blue!25,
+		colback=blue!10,
+		coltitle=blue!20!black,  
+		fonttitle=\bfseries,
+		adjusted title=Formula Or Theorem:
+		]
+		\begin{itemize}
+			\item \textbf{定义4.3.1 (P206)} 设有一随机变量序列$ \{X_n\} $，如果它对任意的$ \varepsilon > 0 $，满足
+			\begin{equation}
+				\lim\limits_{n \to \infty}P\left(\bigg|\frac{1}{n}\sum\limits_{i=1}^{n}X_i-\frac{1}{n}\sum\limits_{i=1}^nE(X_i)\bigg| < \varepsilon\right) = 1\tag{4.3.1}
+			\end{equation}
+			形式，则称该随机变量序列$ \{X_n\} $服从\textbf{大数定律}
+			\item \textbf{定理2.3.1(Chebyshev不等式 P80)} 设随机变量$ X $的数学期望和方差都存在，则对任意常数$ \varepsilon > 0 $，有
+			\begin{equation*}
+				P(|X - E(X)| \geq \varepsilon) \leq \frac{Var(X)}{\varepsilon^2}
+			\end{equation*}
+			或
+			\begin{equation*}
+				P(|X-E(X)| < \varepsilon) \geq 1-\frac{Var(X)}{\varepsilon^2}
+			\end{equation*}
+			\item \textbf{定理4.3.2(Chebyshev大数定律 P206)} 设$ \{X_n\} $为一列两两不相关的随机变量序列，若每个$ X_i $的方差存在，且有共同上界，即$ Var(X_i) \leq c\text{，} i=1, 2, \cdots $，则$ \{X_n\} $服从大数定律，即对任意的$ \varepsilon > 0 $，\textbf{式4.3.1}成立\textbf{(详见书)}
+			\item \textbf{定理4.3.4(Khinchin大数定律 P207)} 设$ \{X_n\} $为一独立同分布的随机变量序列，若$ X_i $的数学期望存在，则$ \{X_n\} $服从大数定律，即对任意的$ \varepsilon > 0 $，\textbf{式4.3.1}成立\textbf{(详见书)}
+		\end{itemize}
+	\end{tcolorbox}
+	\noindent
+	2.1 \quad\textbf{D} \\
+	由$X\sim P(2)$，所以$E(X)=2$，$Var(X)=2$\\
+	由$Chebyshev$不等式
+	\begin{equation*}
+		\begin{split}
+			&P\left(\left|X-E(X)\right|\geq \varepsilon \right) \leq \frac{Var(X)}{\varepsilon^2}\\
+			&P\left(\left|X-E(X)\right|< \varepsilon\right) \geq 1 - \frac{Var(X)}{\varepsilon^2}
+		\end{split}
+	\end{equation*}
+	令$\varepsilon = 2$即可\\
+	\\
+	2.2 \quad\textbf{D} \\
+	先求$E(X+Y)$，$Var(X+Y)$
+	\[E(X+Y) = E(X) + E(Y) = 0\]
+	\begin{equation*}
+		\begin{cases}
+			Var(X+Y)=Var(X)+Var(Y)+2Cov(X,Y)\\
+			Corr(X,Y)=\frac{Cov(X,Y)}{\sigma_X \sigma_Y}
+		\end{cases}
+	\end{equation*}
+	解得$Var(X+Y)=3$，再由$Chebyshev$不等式即可得到下界\\
+	\\
+	2.3 \quad\textbf{D} \\
+	由题意知$X_i \sim Exp(2)$，即得$E(X_i)=1/2$，$ E(X_i^2)=1/2 $\\
+	${X_n}$是独立同分布，由$Khinchin$大数定理
+	\begin{equation*}
+		\frac1n\sum\limits_{i=1}^{n}X_i^2-(\frac1n\sum\limits_{i=1}^{n}X_i)^2 \xrightarrow{\quad P\quad} E(X_n^2) - (E(X_n))^2=\frac14
+	\end{equation*}
+	\\
+	2.4 \quad\textbf{A} \\
+	由$Khinchin$大数定理
+	\begin{equation*}
+		\frac1n \sum\limits_{i=1}^{n}X_i(X_i-1)=\frac1n\sum\limits_{i=1}^{n}X_i^2-\frac1n\sum\limits_{i=1}^{n}X_i \xrightarrow{\quad P \quad} E(X_n^2)-E(X_n) = 1
+	\end{equation*}
+	\begin{tcolorbox}
+		[colframe=blue!25,				%边框颜色
+		colback=blue!10,				%背景颜色
+		coltitle=blue!20!black, 		%标题颜色 
+		fonttitle=\bfseries,			%标题字体
+		adjusted title=Formula Or Theorem:	%盒子标题
+		]
+		\begin{itemize}
+			\item \textbf{定理4.4.1(Lindeberg-Levy中心极限定理 P212)} 设$ X_n $是独立同分布的随机变量序列，且$ E(X_i) = \mu $，$ Var(X_i)=\sigma^2 > 0 $存在，若记
+			\begin{equation*}
+				Y_n^* = \frac{X_1 + X_2 + \cdots + X_n - n\mu}{\sigma \sqrt{n}}
+			\end{equation*}
+			则对任意实数$ y $，有
+			\begin{equation*}
+				\lim\limits_{n \to \infty}P(Y_n^* \leq y) = \varPhi(y) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{y}e^{-\frac{t^2}{2}}dt
+			\end{equation*}
+			\item \textbf{定理4.4.2(de Moivre-Laplace中心极限定理 P214)} 设$ n $重伯努利实验中，事件A在每次试验中出现的概率为$ p (0<p<1) $，记$ S_n $为$ n $次试验中事件A出现的次数，且记
+			\begin{equation*}
+				Y_n^*=\frac{S_n-np}{\sqrt{npq}}
+			\end{equation*}
+			则对任意实数y，有
+			\begin{equation*}
+				\lim\limits_{n \to \infty}P(Y_n^* \leq y) = \varPhi(y) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{y}e^{-\frac{t^2}{2}}dt
+			\end{equation*}
+		\end{itemize}
+	\end{tcolorbox}
+	\noindent
+	2.5 \quad\textbf{B} \\
+	设最多可以装载$n$件产品，由题意
+	\begin{equation*}
+		P\left(\sum\limits_{i=1}^{n} X_i \leq 5000 \right) = 0.99 \tag{$*$}
+	\end{equation*}
+	利用$Lindeberg-Levy$中心极限定理得
+	\begin{equation*}
+		(*)=P\left(\frac{\sum\limits_{i=1}^{n}X_i-50n}{\sigma \sqrt{n}} \leq \frac{5000-50n}{\sigma \sqrt{n}}\right)\approx \Phi\left(\frac{5000-50n}{\sigma \sqrt{n}} \right)=0.99
+	\end{equation*}
+	解得$n_{max}=95$\\
+	\\
+	2.6 \quad\textbf{C} \\
+	设第$i$次称重的重量为$X_i$，易知$\overline{X}_n=\left(\sum\limits_{i=1}^{n}X_i \right)/ n$\\
+	由$Lindeberg-Levy$中心极限定理
+	\begin{equation*}
+		P\left(\left|\frac{\sum\limits_{i=1}^{n}X_i-na}{\sigma\sqrt{n}}\right| < \frac{0.1 n}{\sigma \sqrt{n}}\right)\approx 2\Phi\left(\frac{0.1n}{\sigma \sqrt{n}}\right)-1 \geq 0.95
+	\end{equation*}
+	解得$n_{min} = 16$\\
+	\\
+	2.7 \quad\textbf{B} \\
+	由题意得$X_i \sim P(1)$，则$E(X_i)=1$，$Var(X_i)=1$\\
+	\begin{equation*}
+		\begin{split}
+			&\lim\limits_{n \to \infty}P\left(\sum\limits_{i=1}^{n}X_i > n\right)=1-\lim\limits_{n \to \infty}P\left(\sum\limits_{i=1}^{n}X_i \leq n \right)\\
+			&=1-\lim\limits_{n \to \infty}P\left(\frac{\sum\limits_{i=1}^{n}X_i-n}{\sigma\sqrt{n}} \leq 0\right)=1-\Phi(0)=0.5
+		\end{split}
+	\end{equation*}
+	2.8 \quad\textbf{C}\\
+	易得
+	\begin{equation*}
+		\begin{split}
+			Var(X_i-Y_i)=Var(X_i)+Var(Y_i)=\frac{13}{3}\\
+			E(X_i-Y_i)=E(X_i)-E(Y_i)=0
+		\end{split}
+	\end{equation*}
+	由$Lindeberg-Levy$中心极限定理
+	\begin{equation*}
+		\begin{split}
+			&\lim\limits_{n \to \infty} P\left(\sum\limits_{i=1}^{n}(X_i-Y_i) > 0\right)=1-\lim\limits_{n \to \infty} P\left(\sum\limits_{i=1}^{n}(X_i-Y_i) \leq 0\right)\\
+			&=1-P\left(\frac{\sum\limits_{i=1}^{n}(X_i-Y_i)}{\sigma \sqrt{n}} \leq 0\right) = 1-\Phi(0) = 0.5
+		\end{split}
+	\end{equation*}
+	\\
+	2.9 \quad\textbf{C} \\
+	由$deMoivre-Laplace$中心极限定理得
+	\begin{equation*}
+		\begin{split}
+			P(14 < X < 30) &\approx \Phi\left(\frac{30-20+0.5}{4}\right)-\Phi\left(\frac{14-20-0.5}{4}\right)\\
+			&=\Phi(2.63)+\Phi(1.63)-1\approx 0.944
+		\end{split}
+	\end{equation*}
+	\textbf{未修正的结果为}
+	\[P(14 < X < 30)=\Phi(2.5)+\Phi(1.5)-1\approx 0.927\] \\
+	2.10 \\
+	设每袋味精的质量为随机变量$X_i(i=1,..,200)$，记随机变量序列为$\{X_n\}$，即求
+	\begin{equation*}
+		P\left(\sum\limits_{i=1}^{200}X_i > 20500\right)\tag{$*$}
+	\end{equation*}
+	由$Lindeberg-Levy$中心极限定理得
+	\[(*) = P\left(\frac{\sum\limits_{i=1}^{200}X_i-100\cdot 200}{10\cdot \sqrt{200}} > \frac{500}{100\cdot \sqrt{2}}\right)\approx 1-\Phi\left(\frac{5}{\sqrt{2}}\right)\approx 0.0002326\] \\
+	2.11 \\
+	设每次命中的环数为随机变量$X_i$，记随机变量序列为$\{X_n\}$，其中\\
+	\[E(X_i)=10\times 0.8 + 9\times 0.1 + 8\times 0.05 + 7\times 0.02 + 6\times 0.03 = 9.62\]
+	\[Var(X_i)=E(X_i^2)-(E(X_i))^2=0.82\text{，}\sigma=\sqrt{Var(X_i)}=0.91\]
+	求100次射击命中环数在900环到930环之间的概率，即求
+	\begin{equation*}
+		P\left(900 \leq \sum\limits_{i=1}^{n}X_i \leq 930\right)\tag{$*$}
+	\end{equation*}
+	由$Lindeberg-Levy$中心极限定理得
+	\begin{equation*}
+		\begin{split}
+			(*) &= P\left(\frac{900-100\times 9.62}{0.91 \times 10} \leq \frac{\sum\limits_{i=1}^{n}X_i-100\times 9.62}{0.91\times 10} \leq \frac{930-100\times 9.62}{0.91\times 10}\right)\\
+			&\approx \Phi\left(\frac{930-100\times 9.62}{0.91\times 10}\right) - \Phi\left(\frac{900-100\times 9.62}{0.91 \times 10}\right)\\
+			&= \Phi(6.81)-\Phi(3.52)\approx 0.0002325
+		\end{split}
+	\end{equation*}
+	\section{数理统计基本概念作业}
+	\begin{tcolorbox}
+		[
+			colframe=blue!25,
+			colback=blue!10,
+			coltitle=blue!20!black,  
+			fonttitle=\bfseries,
+			adjusted title=Formula Or Theorem:
+		]
+	\begin{itemize}
+		\item \textbf{定义5.3.1(P232)} 设$ x_1, x_2, \cdots, x_n $为取自某总体的样本，若样本函数$ T = T(x_1, x_2, \cdots, x_n) $中不含有任何未知参数，则称$ T $为\textbf{统计量}，统计量的分布称为\textbf{抽样分布}
+		\item \textbf{定义5.3.2(P233)} 设$ x_1, x_2, \cdots, x_n $为取自某总体的样本，其算数平均值称为样本均值，一般用$ \bar{x} $表示，即
+		\begin{equation*}
+			\bar{x} = \frac{x_1 + x_2 + \cdots + x_n}{n} = \frac{1}{n}\sum\limits_{i=1}^{n}x_i
+		\end{equation*}
+		\item \textbf{定义5.3.3(P236)} 设$ x_1, x_2, \cdots, x_n $为取自某总体的样本，则它关于样本均值$ \bar{x} $的平均偏差平方和
+		\begin{equation}
+			s^2 = \frac{1}{n-1}\sum\limits_{i=1}^{n}(x_i - \bar{x})^2
+		\end{equation}
+		称为\textbf{样本方差}\textbf{(无偏方差)}，其算数平方根$ s = \sqrt{s^2} $称为\textbf{样本标准差}
+		\item \textbf{定理5.3.2(P237)} 设总体$ X $具有二阶矩，即$ E(X) = \mu $，$ Var(X) = \sigma^2 < \infty $，$ x_1, x_2, \cdots, x_n $为从该总体得到的样本，$ \bar{x} $和$ s^2 $分别是样本均值和样本方差，则
+		\begin{equation*}
+			\begin{split}
+				E(\bar{x}) = \mu \quad &, \quad Var(\bar{x}) = \sigma^2 / n \\
+				E(s^2) &= \sigma^2
+			\end{split}
+		\end{equation*}
+	\end{itemize}
+	\end{tcolorbox}
+	\noindent
+	3.1 \quad \textbf{A}\\
+	由\textbf{定理5.3.2}可知$E(\bar{x})=\mu$、$E(s^2)=\sigma^2$
+	\begin{equation*}
+		\begin{split}
+			&E(X) = \frac12\int_{-\infty}^{+\infty}xe^{-|x|}dx = \frac12\int_{-\infty}^{0}xe^{x}dx + \frac12\int_{0}^{+\infty}xe^{-x}dx = 0 \\
+			&E(X^2) = \frac12\int_{-\infty}^{+\infty} x^2e^{-|x|}dx = \frac12\int_{-\infty}^{0} x^2e^{x}dx + \frac12\int_{0}^{+\infty}x^2e^{-x}dx = 2\\
+			&Var(X) = E(X^2) -E(X)^2 = 2S
+		\end{split}
+	\end{equation*}
+	即得$E(\bar{x})=0$、$E(s^2)=2$\\
+	\\
+	\\
+	3.2 \quad \textbf{D} \\
+	将$Y$展开
+	\begin{equation*}
+		\begin{split}
+			Y &= \sum\limits_{i=1}^{n}\left(x_i + x_{i+n} - 2\bar{x}\right)^2 \\
+			&= \sum\limits_{i=1}^{n}x_i^2 + \sum\limits_{i=1}^{n}x_{i+n}^2 + 4\sum\limits_{i=1}^{n}\bar{x}^2 + 2\sum\limits_{i=1}^{n}x_ix_{i+n} - 4\sum\limits_{i=1}^{n}x_i\bar{x} - 4\sum\limits_{i=1}^{n}x_{i+n}\bar{x} \\
+			&= \sum\limits_{i=1}^{2n} x_i^2 + 4n\bar{x}^2 + 2\sum\limits_{i=1}^{n}x_ix_{i+n} -4\bar{x}\sum\limits_{i=1}^{2n}x_i \\
+			&=\sum\limits_{i=1}^{2n}x_i^2 + 2\sum\limits_{i=1}^{n}x_ix_{i+n} - 4n\bar{x}^2 			
+		\end{split}
+	\end{equation*}
+	进而可以得到
+	\begin{equation*}
+		\begin{split}
+			E(Y) &= E\left(\sum\limits_{i=1}^{2n}x_i^2\right) + 2E\left(\sum\limits_{i=1}^{n}x_ix_{i+n}\right) - E(4n\bar{x}^2) \\
+			&= 2n(\mu^2 + \sigma^2) + 2n\mu^2 - 4n(\mu^2 + \frac{\sigma^2}{2n}) \\
+			&= 2(n-1)\sigma^2
+		\end{split}
+	\end{equation*}
+	3.3 \quad \textbf{C} \\
+	由$X \sim N(0, 1)$可得$\mu=0$、$\sigma^2=1$，又
+	\begin{equation*}
+		\begin{split}
+			Cov(Y_1, Y_n) &= E(Y_1Y_n)-E(Y_1)E(Y_n) \\
+			&= E\left((x_1-\bar{x})(x_n-\bar{x})\right) - E(\bar{x})^2 \\
+			&= E(x_1)E(x_n) - E((x_1+x_n)\bar{x}) + E(\bar{x}^2) - E(\bar{x})^2 \\
+			& = Var(\bar{x}) - E(x_1\bar{x}) - E(x_n\bar{x})
+		\end{split}
+	\end{equation*}
+	考虑$E(x_t\bar{x})$
+	\begin{equation*}
+		E(x_t\bar{x}) = \frac{1}{n}E\left(\sum\limits_{i=1}^{n}x_tx_i\right) = \frac{1}{n}\sum\limits_{i=1}^{n}E(x_t)E(x_i) = \frac{n\mu^2}{n} = \mu^2\tag{*}
+	\end{equation*}
+	故而$Cov(Y_1, Y_n) = Var(\bar{x}) = \sigma^2/n$ \\
+	\textbf{注：}$(*)$式想要说明，简单随机抽样下，样本均值与样本是独立的 \\
+	\\
+	3.4 \quad \textbf{D}\\
+	根据\textbf{定义5.3.1}\\
+	\begin{tcolorbox}
+		[
+		colframe=blue!25,
+		colback=blue!10,
+		coltitle=blue!20!black,  
+		fonttitle=\bfseries,
+		adjusted title=Formula Or Theorem:
+		]
+		\begin{itemize}
+			\item \textbf{定理5.3.3(P241)}设总体$ X $的密度函数为$ p(x) $，分布函数为$ F(x) $，$ x_1, x_2, \cdots, x_n $为样本，则第$ k $个次序统计量$ x_{(k)} $的密度函数为
+			\begin{equation*}
+				p_k(x) = \frac{n!}{(k-1)!(n-k)!}(F(x))^{k-1}(1-F(x))^{n-k}p(x)
+			\end{equation*}
+			特别地
+			\begin{equation*}
+				\begin{split}
+					p_1(x) &= n\cdot (1-F(x))^{n-1}p(x) \\
+					p_n(x) &= n\cdot (F(x))^{n-1}p(x)
+				\end{split}
+			\end{equation*}
+		\end{itemize}
+	\end{tcolorbox}
+	\noindent
+	3.5 \quad \textbf{D} \\
+	由$ X \sim U(0, 1) $，写出分布函数以及密度函数
+	\begin{equation*}
+		F(x) = 
+		\begin{cases}
+			0, & x < 0 \\
+			x, & 0 \leq x < 1 \\
+			1, & x \geq 1
+		\end{cases} , \quad 
+		p(x) = 
+		\begin{cases}
+			1, & 0 \leq x \leq 1 \\
+			0, & others
+		\end{cases}
+	\end{equation*}
+	由\textbf{定理5.3.3}
+	\begin{equation*}
+		\begin{split}
+			p_1(x) = n(1-x)^{n-1} & \qquad (0 \leq x \leq 1) \\
+			p_n(x) = nx^{n-1} & \qquad (0 \leq x \leq 1)
+		\end{split}
+	\end{equation*}
+	分别求出$ E(x_{(1)}) $、$ E(x_{(n)}) $
+	\begin{equation*}
+		\begin{split}
+			E(x_{(1)}) &= \int_{0}^{1} nx(1-x)^{n-1}dx = n\frac{\Gamma(2)\Gamma(n)}{\Gamma(n+2)} = \frac{1}{n+1} \\
+			\\
+			E(x_{(n)}) &= \int_{0}^{1} nx^ndx = n\frac{\Gamma(n+1)\Gamma(1)}{\Gamma(n+2)} = \frac{n}{n+1}
+		\end{split}
+	\end{equation*}
+	因此
+	\begin{equation*}
+		E(x_{(n)}) - E(x_{(1)}) = \frac{n-1}{n+1}
+	\end{equation*}
+	\textbf{注：}P242\quad 例5.3.8 \\
+	\section{三大抽样分布作业}
+	\begin{tcolorbox}
+		[
+		colframe=blue!25,
+		colback=blue!10,
+		coltitle=blue!20!black,  
+		fonttitle=\bfseries,
+		adjusted title=Formula Or Theorem:
+		]
+		\begin{itemize}
+			\item \textbf{定义5.4.1、5.4.2、5.4.3} \quad $ \chi^2 $分布(P250)、$ F $分布(P252)、$ t $分布(P254)
+			\item \textbf{定理5.4.1(P251)}设$ x_1, x_2, \cdots, x_n $是来自正态总体$ N(\mu, \sigma^2) $的样本，其样本均值和样本方差分别为
+			\begin{equation*}
+				\bar{x} = \frac{1}{n}\sum\limits_{i=1}^{n} \quad , \quad s^2 = \frac{1}{n-1}\sum\limits_{i=1}^{n}(x_i-\bar{x})^2
+			\end{equation*}
+			则有 \\
+			(1) $ \bar{x} \text{和} s^2 \text{相互独立} $ \\
+			(2) $ \bar{x} \sim N(\mu, \sigma^2/n) $ \\
+			(3) $ \frac{(n-1)s^2}{\sigma^2} \sim \chi^2(n-1) $
+		\end{itemize}
+	\end{tcolorbox}
+	\noindent
+	4.1 \quad\textbf{C}\\
+	这里未指明$X$、$Y$相互独立\\
+	\\
+	4.2 \quad\textbf{A} \\
+	易知
+	\begin{equation*}
+		\begin{split}
+			X_1 - 2X_2 & \sim N(0, 20) \\
+			3X_3 - 4X_4 & \sim N(0, 100) \\
+		\end{split}
+	\end{equation*}
+	所以有
+	\begin{equation*}
+		\begin{split}
+			\frac{X_1 - 2X_2}{\sqrt{20}} \sim N(0, 1) \qquad  &\Rightarrow\qquad \frac{(X_1 - 2X_2)^2}{20} \sim \chi^2(1) \\
+			\frac{3X_3-4X_4}{\sqrt{100}} \sim N(0, 1) \qquad &\Rightarrow \qquad \frac{(3X_3-4X_4)^2}{100} \sim \chi^2(1)
+		\end{split}
+	\end{equation*}
+	易得$ a = 1/20, b = 1/100, n = 2$\\
+	\\
+	4.3 \quad \textbf{B}\\
+	由\textbf{定理5.3.2}可知$E(s^2)=\sigma^2=Var(X)$\\
+	\begin{equation*}
+		\begin{split}
+			E(X) &= \int_{-\infty}^{+\infty}xf(x)dx = 0 \\
+			&\\
+			E(X^2) &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{+\infty} x^4e^{-\frac{x^2}{2}}dx=\sqrt{\frac{2}{\pi}}\int_{0}^{+\infty} x^4e^{-\frac{x^2}{2}}dx \\
+			&= \frac{4}{\sqrt{\pi}} \int_{0}^{+\infty} u^{\frac{3}{2}}e^{-u}du = \frac{4}{\sqrt{\pi}}\Gamma\left(\frac{5}{2}\right) = 3 \\
+			& \\
+			E(s^2) &= Var(X) = E(X^2) - E(X)^2 = 3
+		\end{split}
+	\end{equation*}
+	\\
+	4.4 \quad \textbf{D} \\
+	\begin{equation*}
+		E\left(\bar{x}^2 - \frac1n s^2\right) = E(\bar{x}^2) - \frac{1}{n}E(s^2)
+	\end{equation*}
+	由\textbf{定理5.4.1}，可知$\bar{x}\sim N(0, 1/n)$，易得
+	\begin{equation*}
+		E(\bar{x}^2) = Var(\bar{x}) + E(\bar{x})^2 = \frac{1}{n}
+	\end{equation*}
+	而$E(s^2) = \sigma^2 = 1$，所以
+	\begin{equation*}
+		E\left(\bar{x}^2 - \frac1n s^2\right) = 0
+	\end{equation*}
+	由\textbf{定理5.4.1}，可知$\bar{x}$与$s^2$相互独立，因此
+	\begin{equation*}
+		\begin{split}
+			Var\left(\bar{x}^2 - \frac{1}{n}s^2 \right) &= Var(\bar{x}^2) + \frac{1}{n^2}Var(s^2) \\
+			&= \frac{1}{n^2}Var(n\bar{x}^2) + \frac{1}{n^2(n-1)^2}Var((n-1)s^2) \\
+			&= \frac{1}{n^2}Var\left(\left(\frac{\bar{x}}{1/\sqrt{n}}\right)^2\right) + \frac{1}{n^2(n-1)^2} Var\left(\frac{(n-1)s^2}{1}\right)
+		\end{split}\tag{$*$}
+	\end{equation*}
+	由于
+	\begin{equation*}
+		\begin{split}
+			\frac{\bar{x}}{1/\sqrt{n}} \sim N(0,1)\qquad \Rightarrow \qquad \left(\frac{\bar{x}}{1/\sqrt{n}}\right)^2 \sim \chi^2(1)
+		\end{split}
+	\end{equation*}
+	由\textbf{定理5.4.1}可以知道
+	\begin{equation*}
+		\frac{(n-1)s^2}{1} \sim \chi^2(n-1)
+	\end{equation*}
+	因而有
+	\begin{equation*}
+		Var\left(\left(\frac{\bar{x}}{1/\sqrt{n}}\right)^2\right) = 2 \quad, \quad Var\left(\frac{(n-1)s^2}{1}\right) = 2(n-1)
+	\end{equation*}
+	带入$ (*) $即得
+	\begin{equation*}
+		Var\left(\bar{x}^2 - \frac{1}{n}s^2 \right) = \frac{2}{n(n-1)}
+	\end{equation*}
+	\\
+	4.5 \quad \textbf{C} \\
+	\textbf{(法1)}因为$X \sim F(n, n)$，所以$1/X \sim F(n, n)$所以有
+	\begin{equation*}
+		P(X<1) = P\left(\frac{1}{X} < 1\right) = P(X>1)
+	\end{equation*}
+	当然又有
+	\begin{equation*}
+		P(X<1) + P(X>1) = 1
+	\end{equation*}
+	因此
+	\begin{equation*}
+		P(X<1) = \frac12
+	\end{equation*}
+	\textbf{(法2)}因为$X \sim F(n, n)$，记$X$的密度函数为$p(x)$，则
+	\begin{equation*}
+		p(x) = \frac{\Gamma(n)}{\Gamma\left(\frac{n}{2}\right)\Gamma\left(\frac{n}{2}\right)} x^{\frac{n}{2}-1}(1+x)^{-n}
+	\end{equation*}
+	所以
+	\begin{equation*}
+		P(X<1) = \frac{\Gamma(n)}{\Gamma\left(\frac{n}{2}\right)\Gamma\left(\frac{n}{2}\right)} \int_{0}^{1} x^{\frac{n}{2}-1}(1+x)^{-n} dx\tag{$*$}
+	\end{equation*}
+	考虑$(*)$式的积分部分
+	\begin{equation*}
+		\int_{0}^{1} x^{\frac{n}{2}-1}(1+x)^{-n} dx = \int_{0}^{1} (\sqrt{x})^{n-2}(1+x)^{-n} dx \tag{$I$}
+	\end{equation*}
+	令$t=\sqrt{x}$，则$dx=2tdt$，带入$(I)$式
+	\begin{equation*}
+		(I) = \int_{0}^{1} \frac{t^{n-1} }{(1+t^2)^n} dt\tag{$ II $}
+	\end{equation*}
+	这里令$t=tanu$，则$dt=sec^2udu$，带入$(II)$式
+	\begin{equation*}
+		\begin{split}
+			(II) &= 2\int_{0}^{\frac{\pi}{4}}\frac{tan^{n-1}u}{sec^{2n}u}\cdot sec^2udu = 2\int_{0}^{\frac{\pi}{4}}sin^{n-1}u \cdot cos^{n-1}u du \\
+			&=\frac{1}{2^{n-2}}\int_{0}^{\frac{\pi}{4}}(2 \cdot sinu \cdot cosu)^{n-1}du = \frac{1}{2^{n-2}}\int_{0}^{\frac{\pi}{4}}sin^{n-1}2udu \\
+			&= \frac{1}{2^{n-1}}\int_{0}^{\frac{\pi}{2}} sin^{n-1}vdv
+		\end{split}
+	\end{equation*}
+	\textbf{当$2 \nmid n$时}
+	\begin{equation*}
+		\int_{0}^{\frac{\pi}{2}} sin^{n-1}vdv = \frac{(n-2)!!}{(n-1)!!}\frac{\pi}{2}
+	\end{equation*}
+	带入$(*)$式得
+	\begin{equation*}
+		(*) = \frac{\Gamma(n)}{\Gamma\left(\frac{n}{2}\right)\Gamma\left(\frac{n}{2}\right)} \cdot \frac{1}{2^{n-1}} \cdot \frac{(n-2)!!}{(n-1)!!}\frac{\pi}{2} = \frac{2^{n-1}\cdot (n-1)!}{((n-2)!!)^2\cdot \pi} \cdot \frac{1}{2^{n-1}} \cdot \frac{(n-2)!!}{(n-1)!!}\frac{\pi}{2} = \frac{1}{2}
+	\end{equation*}
+	\textbf{当$2\mid n$时}，同理可得$(*) = 1/2$
+	\[\qquad \]
+	\textbf{注} \\
+	\begin{equation*}
+		I_m = \int_{0}^{\frac{\pi}{2}} cos^{m}xdx = \int_{0}^{\frac{\pi}{2}} sin^{m}xdx
+	\end{equation*}
+	则有
+	\begin{equation*}
+		I_{m} = 
+		\begin{cases}
+			\frac{(m-1)!!}{m!!} \cdot \frac{\pi}{2}, & 2 \mid m \\
+			\frac{(m-1)!!}{m!!}, & 2 \nmid m
+		\end{cases}
+	\end{equation*}
+	\newpage 
+	\section{三大抽样分布第二次作业}
+	\begin{tcolorbox}
+		[
+		colframe=blue!25,
+		colback=blue!10,
+		coltitle=blue!20!black,  
+		fonttitle=\bfseries,
+		adjusted title=Formula Or Theorem:
+		]
+		\begin{itemize}
+			\item \textbf{推论5.4.1(P254)} 设$ x_1, x_2, \cdots, x_m $是来自$ N(\mu_1, \sigma_1^2) $的样本，$ y_1, y_2, \cdots, y_n $是来自$ N(\mu_2, \sigma_2^2) $的样本，且两样本相互独立，记
+			\begin{equation*}
+				s_x^2 = \frac{1}{m-1}\sum\limits_{i=1}^{m}(x_i - \bar{x})^2 \quad , \quad s_y^2 = \frac{1}{n-1}\sum\limits_{i=1}^{n}(y_i - \bar{y})^2
+			\end{equation*}
+			则有
+			\begin{equation*}
+				F = \frac{s_x^2 / \sigma_1^2}{s_y^2 / \sigma_2^2} \sim F(m-1, n-1)
+			\end{equation*}
+			特别，若$ \sigma_1^2 = \sigma_2^2 $，则$ F = s_x^2 / s_y^2 \sim F(m-1, n-1) $
+			\item \textbf{推论5.4.2(P256)} 设$ x_1, x_2, \cdots, x_n $是来自正态分布$ N(\mu, \sigma^2) $的一个样本，$ \bar{x} $与$ s^2 $分别是该样本的样本均值与样本方差，则有
+			\begin{equation*}
+				t = \frac{\sqrt{n}(\bar{x} - \mu)}{s} \sim t(n-1)
+			\end{equation*}
+		\end{itemize}
+	\end{tcolorbox}
+	\noindent
+	5.1 \quad \textbf{A} \\
+	容易知道$ X $、$ Y $相互独立(P133\quad $ \rho = 0 $) \\
+	\begin{equation*}
+		f(x, y) = \frac{1}{12\pi} e^{-\frac{x^2}{8}}\cdot e^{-\frac{(y-1)^2}{18}} = \frac{1}{\sqrt{2\pi} \cdot 2} e^{-\frac{x^2}{2\cdot 2^2}}\cdot \frac{1}{\sqrt{2\pi} \cdot 3} e^{-\frac{(y-1)^2}{2\cdot 3^2}}
+	\end{equation*}
+	即可得到
+	\begin{equation*}
+		X \sim N(0, 4) \qquad and \qquad Y \sim N(1, 9)
+	\end{equation*}
+	则
+	\begin{equation*}
+		\left(\frac{X}{2}\right)^2 \sim \chi^2(1) \quad and \quad \left(\frac{Y-1}{3}\right)^2 \sim \chi^2(1)
+	\end{equation*}
+	即
+	\begin{equation*}
+		\frac{9}{4}\cdot \frac{X^2}{(Y-1)^2} \sim F(1, 1)
+	\end{equation*}
+	\\
+	5.2 \quad \textbf{D} \\
+	这里仅证明D选项
+	\begin{equation*}
+		\begin{split}
+			\frac{1}{2}\sum\limits_{i=1}^{2n}X_i^2 + \sum\limits_{i=1}^{n} X_{2i-1}X_{2i} &= \frac{1}{2}\left(\sum\limits_{i=1}^{2n}X_i^2 + 2\sum\limits_{i=1}^{n} X_{2i-1}X_{2i}\right) \\
+			&= \frac{1}{2}\sum\limits_{i=1}^{n}\left(X_{2i-1}^2 + 2X_{2i-1}X_{2i} + X_{2i}^2 \right) \\
+			&= \sum\limits_{i=1}^{n} \left(\frac{X_{2i-1} + X_{2i}}{\sqrt{2}}\right)^2
+		\end{split}
+		\tag{$*$}
+	\end{equation*}
+	由于$ X_{2i-1} + X_{2i} \sim N(0, 2) $，所以$ (*) \sim \chi^2(n) $\\
+	\\
+	5.3 \quad \textbf{D} \\
+	因为$X\sim N(0, \sigma^2)$，所以$\bar{x}^2$、$ s^2 $相互独立
+	\begin{equation*}
+		\begin{split}
+			Var(\hat{\sigma}^2) &= Var(cn\bar{x}^2) + Var((1-c)s^2) \\
+			&= c^2Var(n\bar{x}^2) + (1-c)^2Var(s^2) \\
+			&= \sigma^4c^2Var\left(\frac{n\bar{x}^2}{\sigma^2}\right) + \frac{(1-c)^2\sigma^4}{(n-1)^2}Var\left(\frac{(n-1)s^2}{\sigma^2}\right)
+		\end{split}
+		\tag{$*$}
+	\end{equation*}
+	由\textbf{定理5.4.1}
+	\begin{equation*}
+		\bar{x} \sim N\left(0, \frac{\sigma^2}{n}\right) \quad and \quad \frac{(n-1)s^2}{\sigma^2} \sim \chi^2(n-1)
+	\end{equation*}
+	即
+	\begin{equation*}
+		\left(\frac{\sqrt{n}\bar{x}}{\sigma}\right)^2 \sim \chi^2(1)
+	\end{equation*}
+	带入$(*)$式即得
+	\begin{equation*}
+		(*) = 2\sigma^4c^2 + \frac{2(1-c)^2\sigma^4}{(n-1)} = \frac{2\sigma^4}{n-1}(nc^2 - 2c + 1)
+	\end{equation*}
+	易知，当$ c = 1/n $时，$ (*) $式取最小值\\
+	\\
+	5.4 \quad \textbf{A} \\
+	易得
+	\begin{equation*}
+		\frac{\sum\limits_{k=1}^{i} X_k^2 / (\sigma^2\cdot i) }{\sum\limits_{k=i+1}^{10}X_k^2/ (\sigma^2\cdot (10-i))} = \frac{\sum\limits_{k=1}^{i} X_k^2}{\sum\limits_{k=i+1}^{10}X_k^2}\cdot \frac{10-i}{i}
+	\end{equation*}
+	所以
+	\begin{equation*}
+		\frac{10-i}{i} = 4 \quad \Rightarrow \quad i = 2
+	\end{equation*}
+	\\
+	5.5 \quad \textbf{C} \\
+	\begin{equation*}
+		\begin{split}
+			& P(|X|<x) = 1-P(|X|\geq x) \\
+			\Rightarrow & P(|X|\geq x) = 1-\alpha \\
+			=& P(X \leq -x) + P(X \geq x) = 2P(X \geq x) 
+			\\
+			\\
+			\Rightarrow & P(X \geq x) = \frac{1-\alpha}{2}
+		\end{split}
+	\end{equation*}
+	即 $ x = U_{(1-\alpha) / 2} $ \\
+	\newpage
+	\section{矩估计作业}
+	\begin{tcolorbox}
+		[
+		colframe=blue!25,
+		colback=blue!10,
+		coltitle=blue!20!black,  
+		fonttitle=\bfseries,
+		adjusted title=Formula Or Theorem:
+		]
+		\begin{itemize}
+			\item \textbf{替换原理与矩法估计(P272)} \\
+			(1) 用样本矩去替换总体矩，这里的矩可以是原点矩也可以是中心矩 \\
+			(2) 用样本矩的函数去替换相应的总体矩的函数
+		\end{itemize}
+	\end{tcolorbox}
+	\noindent
+	对于一个待估计参数$ \theta $，需要用样本均值替换总体均值；对于两个待估计参数$ \theta $、$ \lambda $，需要用样本均值替换总体均值，样本方差替换总体方差\\ \\
+	6.1 \quad \textbf{D} \\
+	首先求出总体均值$ E(X) $
+	\begin{equation*}
+		E(X) = -1 \cdot 2\theta + 0 \cdot \theta + 1 \cdot (1-3\theta) = 1 - 5 \theta
+	\end{equation*}
+	用样本均值$ \bar{x} $替换总体均值
+	\begin{equation*}
+		1 - 5\hat{\theta} = \bar{x} \quad \Rightarrow \quad \hat{\theta} = \frac{1-\bar{x}}{5}
+	\end{equation*}
+	\\
+	6.2 \quad \textbf{D} \\
+	请读者验证 \\ \\
+	6.3 \quad \textbf{C} \\
+	求总体均值$ E(X) $ 
+	\begin{equation*}
+		\begin{split}
+			E(X) &= \int_{0}^{\theta} \frac{6x^2}{\theta^3}(\theta - x)dx = 6\theta \int_{0}^{\theta} \left(\frac{x}{\theta}\right)^2 \cdot \left(1-\frac{x}{\theta}\right)d\left(\frac{x}{\theta}\right) \\
+			&= 6\theta \int_{0}^{1}t^2(1-t)dt = 6\theta \cdot \frac{\Gamma(3)\Gamma(2)}{\Gamma(5)} = \frac{\theta}{2} \qquad \textbf{[附录I]}
+		\end{split}
+	\end{equation*}
+	用样本均值$ \bar{x} $替换总体均值
+	\begin{equation*}
+		\frac{\hat{\theta}}{2} = \bar{x} \quad \Rightarrow \quad \hat{\theta} = 2\bar{x}
+	\end{equation*}
+	那么
+	\begin{equation*}
+		Var(\hat{\theta}) = 4Var(\bar{x}) = \frac{4\sigma^2}{n}
+	\end{equation*}
+	需要求出$ \sigma^2 $，即$ Var(X) $
+	\begin{equation*}
+		\begin{split}
+			E(X^2) &= \int_{0}^{\theta}\frac{6x^3}{\theta^3}(\theta - x)dx = 6\theta^2\int_{0}^{\theta} \left(\frac{x}{\theta}\right)^3\cdot \left(1-\frac{x}{\theta}\right)d\left(\frac{x}{\theta}\right) \\
+			&= 6\theta^2\int_{0}^{1}t^3(1-t)^3dt = 6\theta^2\cdot \frac{\Gamma(4)\Gamma(2)}{\Gamma(6)} = \frac{3\theta^2}{10}
+		\end{split}
+	\end{equation*}
+	\begin{equation*}
+		Var(X) = E(X^2) - E(X)^2 = \frac{\theta^2}{20}
+	\end{equation*}
+	因此$ Var(\hat{\theta}) = \theta^2/5n $\\
+	\\
+	6.4 \quad \textbf{C} \\
+	\textbf{利用积分求}$ E(X) $、$ Var(X) $ \\
+	\begin{equation*}
+		\begin{split}
+			E(X) &= \frac{1}{\lambda}e^{\frac{\theta}{\lambda}}\int_{\theta}^{+\infty} xe^{-\frac{x}{\lambda}}dx = \frac{1}{\lambda}e^{\frac{\theta}{\lambda}} \cdot (-\lambda) \int_{\theta}^{+\infty} x de^{-\frac{x}{\lambda}} \\
+			&= -e^{\frac{\theta}{\lambda}} \left(xe^{-\frac{x}{\lambda}} \bigg|_{\theta}^{+\infty} - \int_{\theta}^{+\infty} e^{-\frac{x}{\lambda}}dx \right) = -e^{\frac{\theta}{\lambda}} \left(-\theta e^{-\frac{\theta}{\lambda}} + \lambda e^{-\frac{x}{\lambda}} \bigg|_{\theta}^{+\infty} \right) \\
+			&= \lambda + \theta
+		\end{split}
+	\end{equation*}
+	\\
+	\begin{equation*}
+		\begin{split}
+			E(X^2) &= \frac{1}{\lambda} e^{\frac{\theta}{\lambda}} \int_{\theta}^{+\infty} x^2e^{-\frac{x}{\lambda}}dx = \frac{1}{\lambda} e^{\frac{\theta}{\lambda}} \cdot (-\lambda)
+			\int_{\theta}^{+\infty} x^2de^{-\frac{x}{\lambda}} \\
+			&= -e^{\frac{\theta}{\lambda}} \left(x^2e^{-\frac{x}{\lambda}} \bigg|_{\theta}^{+\infty} - 2\int_{\theta}^{+\infty} x e^{-\frac{x}{\lambda}}dx\right) = -e^{\frac{\theta}{\lambda}} \left(-\theta^2e^{-\frac{x}{\lambda}} - 2I \right)
+		\end{split}
+	\end{equation*}
+	由上可知
+	\begin{equation*}
+		\frac{1}{\lambda} e^{\frac{\theta}{\lambda}} \cdot I = \frac{1}{\lambda} e^{\frac{\theta}{\lambda}} \int_{\theta}^{+\infty} x^2e^{-\frac{x}{\lambda}}dx = \lambda + \theta 
+	\end{equation*}
+	即得到
+	\begin{equation*}
+		I = \lambda (\lambda + \theta) e^{\frac{\theta}{\lambda}}
+	\end{equation*}
+	带入得
+	\begin{equation*}
+		E(X^2) = -e^{\frac{\theta}{\lambda}} \left(-\theta^2e^{-\frac{x}{\lambda}} - 2 \lambda (\lambda + \theta) e^{-\frac{\theta}{\lambda}} \right) = \theta^2 + 2\lambda^2 + 2\lambda\theta
+	\end{equation*}
+	即得
+	\begin{equation*}
+		Var(X) = E(X^2) - E(X)^2 = \lambda^2
+	\end{equation*}
+	令$ \bar{x} = \lambda + \theta \quad and \quad s^2 = \lambda^2 $即可\\
+	\\
+	\textbf{这里复习一下4.2 特征函数求均值和方差}\\
+	\textbf{求$ p(x) $特征函数}
+	\begin{equation*}
+		\begin{split}
+			\varphi(t) &= \int_{\theta}^{+\infty} e^{itx} \cdot \frac{1}{\lambda} e^{-\frac{1}{\lambda}(x - \theta)}dx = \frac{1}{\lambda}e^{\frac{\theta}{\lambda}}\int_{\theta}^{+\infty} e^{(-\frac{1}{\lambda}+it)x}dx \\
+			&= \frac{1}{\lambda} e^{-\frac{1}{\lambda}} \cdot \frac{1}{it-1/\lambda} \cdot e^{(-\frac{1}{\lambda}+it)x}\bigg|_{\theta}^{+\infty} = \frac{e^{i\theta t}}{1-i\lambda t} \\
+			&\\
+			\varphi'(t) &= \frac{i\theta e^{i\theta t}(1-i\lambda t) + i\lambda e^{i\theta t}}{(1-i\lambda t)^2} = e^{i\theta t} \cdot \frac{i(\lambda + \theta) + \lambda \theta t}{(1-i\lambda t)^2} \\
+			&\\
+			\varphi''(t) &= i\theta e^{i\theta t} \cdot \frac{i(\lambda + \theta) + \lambda \theta t}{(1-i\lambda t)^2} + e^{i\theta t} \cdot \frac{-2\lambda^2 - \lambda \theta + \lambda^2\theta ti}{(1-i\lambda t)^3}
+		\end{split}
+	\end{equation*}
+	即有
+	\begin{equation*}
+		\begin{split}
+			\varphi'(0) = i(\lambda + \theta) \quad and \quad 
+			\varphi''(0) &= i\theta \cdot i(\lambda + \theta) + (-2\lambda^2 - \lambda \theta) \\
+			& = -(\theta^2 + 2\lambda^2 + 2\lambda\theta)
+		\end{split}
+	\end{equation*}
+	由性质\textbf{4.2.5}得
+	\begin{equation*}
+		\begin{split}
+			E(X) &= \frac{\varphi'(0)}{i} = \lambda + \theta \\
+			&\\
+			Var(X) &= -\varphi''(0) + (\varphi'(0))^2 = \lambda^2
+		\end{split}
+	\end{equation*}
+	令$ \bar{x} = \lambda + \theta \quad and \quad s^2 = \lambda^2 $即可 \\
+	\\
+	6.5 \quad \textbf{B} \\
+	请读者验证 \\ \\
+	\section{极大似然估计作业}
+	\begin{tcolorbox}
+		[
+		colframe=blue!25,
+		colback=blue!10,
+		coltitle=blue!20!black,  
+		fonttitle=\bfseries,
+		adjusted title=Formula Or Theorem:
+		]
+		\begin{itemize}
+			\item \textbf{定义6.3.1(P278)} 设总体的概率函数为$ p(x|\theta) $，$ \theta \in \Theta $，其中$ \theta $是一个未知参数或几个未知参数组成的参数向量，$ \Theta $是参数空间，$ x_1, x_2, \cdots, x_n $是来自该总体的样本，将样本的联合概率函数看成$ \theta $的函数，用$ L(\theta|x_1, x_2, \cdots, x_n) $表示，简记为$ L(\theta) $，
+			\begin{equation*}
+				L(\theta) = L(\theta|x_1, x_2, \cdots, x_n) = p(x_1|\theta)P(x_2|\theta)\cdots p(x_n|\theta)
+			\end{equation*}
+			$ L(\theta) $称为\textbf{似然函数}.如果某统计量$ \hat{\theta} = \hat{\theta}(x_1, x_2, \cdots, x_n) $满足
+			\begin{equation*}
+				L(\hat{\theta}) = \max\limits_{\theta \in \Theta} L(\theta)
+			\end{equation*}
+			则称$ \hat{\theta} $是$ \theta $的\textbf{最大似然估计}
+			\item In brief, a statistic $ \hat{\theta}(x_1, x_2, \cdots, x_n) $ is a \textbf{maximum likelihood estimator} of $ \theta $ if, for each sample $ x_1, x_1, \cdots, x_n, \hat{\theta}(x_1, x_2, \cdots, x_n) $ is a value for the parameter that maximizes the likelihood function $ L(\theta|x_1, x_2, \cdots, x_n) $
+		\end{itemize}
+	\end{tcolorbox}
+	\newpage 
+	\noindent
+	7.1 \quad \textbf{C} \\
+	对$ F(x|\theta) $求导得到密度函数
+	\begin{equation*}
+		p(x|\theta) = 
+		\begin{cases}
+			\frac{2\theta}{x^3}, & x \geq \theta (\theta > 1) \\
+			0, & others
+		\end{cases}
+	\end{equation*}
+	写出似然函数
+	\begin{equation*}
+		L(\theta) = \prod\limits_{i=1}^{n} p(x|\theta) = \prod\limits_{i=1}^{n} \frac{2\theta}{x_i^3} \qquad (x_i \geq \theta)
+	\end{equation*}
+	两边取对数得
+	\begin{equation*}
+		lnL(\theta) = nln2\theta - \sum\limits_{i=1}^{n}lnx_i^3
+	\end{equation*}
+	显然$ L(\theta) $单调递增，又有$ x_i \geq \theta $，所以$ \hat{\theta} = min\{x_i\} = x_{(1)} $ \\
+	\\
+	7.2 \quad \textbf{B} \\
+	写出似然函数
+	\begin{equation*}
+		L(\theta) = \prod\limits_{i=1}^{n} (1+\theta)x_i^{\theta}
+	\end{equation*}
+	两边取对数得
+	\begin{equation*}
+		lnL(\theta) = nln(1+\theta) + \theta \sum\limits_{i=1}^{n} lnx_i
+	\end{equation*}
+	对$ \theta $求导
+	\begin{equation*}
+		\frac{d}{d\theta} lnL(\theta) = \frac{n}{1+\theta} + \sum\limits_{i=1}^{n}lnx_i
+	\end{equation*}
+	令导数等于0，求导极大值点为
+	\begin{equation*}
+		\hat{\theta} = -\frac{n}{\sum\limits_{i=1}^{n}lnx_i} - 1
+	\end{equation*}
+	\\
+	7.3 \quad \textbf{B} \\
+	请读者验证 \\
+	\\ 
+	7.4 \quad \textbf{C} \\
+	求出总体均值
+	\begin{equation*}
+		E(X) = -\theta^2 + (1-\theta)^2 = 1 - 2\theta 
+	\end{equation*}
+	用样本均值替换总体均值
+	\begin{equation*}
+		1 - 2\theta = \bar{x} \quad \Rightarrow \quad \bar{\theta}_M = \frac{1 - \bar{x}}{2}
+	\end{equation*}
+	写出似然函数
+	\begin{equation*}
+		\begin{split}
+			L(\theta) &= \theta^{2N_1} \cdot (2\theta(1-\theta))^{N_2} \cdot (1-\theta)^{2(n-N_1-N_2)} \\
+			&= 2^{N_2} \cdot \theta^{2N_1+N_2} \cdot (1-\theta)^{2n-2N_1-N_2}
+		\end{split}
+	\end{equation*}
+	令$ s = 2N_1 + N_2 $，$ t = 2n - 2N_1 - N_2 $ ，对$ \theta $求导
+	\begin{equation*}
+		L(\theta) = 2^{N_2} \cdot \theta^{s} \cdot (1-\theta)^{t}
+	\end{equation*}
+	\begin{equation*}
+		\frac{d}{d\theta}L(\theta) = 2^{N_2} \cdot \theta^{s-1}(1-\theta)^{t-1}(s-(s+t)\theta)
+	\end{equation*}
+	求出极大值点为
+	\begin{equation*}
+		\hat{\theta}_L = \frac{s}{s + t} = \frac{2N_1 + N_2}{2n}
+	\end{equation*}
+	\\
+	7.5 \quad \textbf{A} \\
+	求出总体均值
+	\begin{equation*}
+		E(X) = \sum\limits_{t=1}^{N} \frac{t}{N} = \frac{1+N}{2}
+	\end{equation*}
+	用样本均值替换总体均值
+	\begin{equation*}
+		\frac{1+N}{2} = \bar{x} \quad \Rightarrow \quad \hat{N}_M = 2\bar{x} - 1
+	\end{equation*}
+	写出似然函数
+	\begin{equation*}
+		L(N) = \prod\limits_{i=1}^{N} \frac{1}{N} = \left(\frac{1}{N}\right)^N \qquad (x_i \leq N)
+	\end{equation*}
+	显然$ L(N) $单调递减，又有$ x_i \leq N $，所以$ \hat{N}_L = max\{x_i\} = x_{(n)} $ \\ \\
+	\section{估计量的评判标准作业} 
+	\begin{tcolorbox}
+		[
+		colframe=blue!25,
+		colback=blue!10,
+		coltitle=blue!20!black,  
+		fonttitle=\bfseries,
+		adjusted title=Formula Or Theorem:
+		]
+		\begin{itemize}
+			\item \textbf{定义6.2.1(P267)} 设$ \hat{\theta} = \hat{\theta}(x_1, x_2, \cdots, x_n) $是$ \theta $的一个估计，$ \theta $的参数空间为$ \Theta $，若对任意的$ \theta \in \Theta $，有
+			\begin{equation*}
+				E(\hat{\theta}) = \theta
+			\end{equation*}
+			则称$ \hat{\theta} $是$ \theta $的\textbf{无偏估计}，否则称为\textbf{有偏估计}
+			\item A statistic $ \hat{\theta} $ is said to be an \textbf{unbiased estimator}, or its value an unbiased estimate, if and only if the mean of the sampling distribution of the estimator $ E(\hat{\theta}) = \theta $, whatever the value of $ \theta $
+		\end{itemize}
+	\end{tcolorbox}
+	\noindent
+	8.1 \quad \textbf{C} \\
+	因为$ x_i \sim N(\mu, \sigma^2) $，容易知道
+	\begin{equation*}
+		x_{i+1} - x_{i} \sim N(0, 2\sigma^2)
+	\end{equation*}
+	标准化后得
+	\begin{equation*}
+		\frac{x_{i+1} - x_{i}}{\sqrt{2} \sigma} \sim N(0, 1) \quad \Rightarrow \quad \left(\frac{x_{i+1} - x_{i}}{\sqrt{2} \sigma}\right)^2 \sim \chi^2(1)
+	\end{equation*}
+	求和得
+	\begin{equation*}
+		\sum\limits_{i=1}^{n-1} \left(\frac{x_{i+1} - x_{i}}{\sqrt{2} \sigma}\right)^2 \sim \chi^2(n-1)
+	\end{equation*}
+	求数学期望得
+	\begin{equation*}
+		\frac{1}{2\sigma^2} E \left(\sum\limits_{i=1}^{n-1} \left(x_{i+1} - x_{i}\right)^2\right) = n - 1
+	\end{equation*}
+	即得
+	\begin{equation*}
+		cE \left(\sum\limits_{i=1}^{n-1} \left(x_{i+1} - x_{i}\right)^2\right) = 2c\sigma^2(n-1) 
+	\end{equation*}
+	因为目标统计量是$ \sigma^2 $的无偏估计，可知
+	\begin{equation*}
+		2c\sigma^2(n-1) = \sigma^2 \quad \Rightarrow \quad c = \frac{1}{2(n-1)}
+	\end{equation*}
+	\\
+	8.2 \quad \textbf{A} \\
+	求数学期望
+	\begin{equation*}
+		E(\bar{x} + cs^2) = E(\bar{x}) + cE(s^2) = np(1+c-cp)
+	\end{equation*}
+	由\textbf{定义6.2.1}
+	\begin{equation*}
+		1+c-cp = p \quad \Rightarrow \quad c = -1
+	\end{equation*}
+	\\
+	8.3 \quad \textbf{D} \\
+	这里仅证明D选项
+	先求分布函数
+	\begin{equation*}
+		F(x) = 
+		\begin{cases}
+			1 - e^{-(x-\theta)}, & x \geq \theta \\
+			0, & x < \theta
+		\end{cases}
+	\end{equation*}
+	根据\textbf{定理5.3.3}
+	\begin{equation*}
+		p_1(x) = n \cdot (1-F(x))^{n-1} p(x)
+	\end{equation*}
+	带入得到
+	\begin{equation*}
+		p_1(x) = n e^{-n(x-\theta)}
+	\end{equation*}
+	求$ x_{(1)} $的数学期望
+	\begin{equation*}
+		\begin{split}
+			E(x_{(1)}) &= \int_{\theta}^{+\infty} nx e^{-n(x -\theta)}dx = \int_{0}^{+\infty} n(t+\theta)e^{-nt}dt \\
+			&= \frac{1}{n} \int_{0}^{+\infty} nt e^{-nt}d(nt) + n\theta \int_{0}^{+\infty} e^{-nt}dt \\
+			&= \frac{1}{n} \Gamma(2) + \theta = \frac{1}{n} + \theta
+		\end{split}
+	\end{equation*}
+	所以$ E(x_{(1)} - 1/n) = \theta $ \\
+	\\
+	8.4 \quad \textbf{C} \\
+	直接求$ E(\hat{p}) $
+	\begin{equation*}
+		\begin{split}
+			E(\hat{p}) &= c E\left(\sum\limits_{i=1}^{n} x_i(x_i - 1)\right) = c \sum\limits_{i=1}^n\left(E(x_i^2) - E(x_i)\right) \\
+			&= c \sum\limits_{i=1}^n \left(Var(x_i) + E(x_i)^2 - E(x_i)\right) = c\sum\limits_{i=1}^n(mp(1-p) + m^2p^2 - mp) \\
+			&= cnp^2m(m-1)
+		\end{split}
+	\end{equation*}
+	由于$ \hat{p} $ 是$ p^2 $的无偏估计，根据\textbf{定义6.2.1}
+	\begin{equation*}
+		cnp^2m(m-1) = p^2 \quad \Rightarrow \quad c = \frac{1}{mn(m-1)}
+	\end{equation*} \\
+	\begin{tcolorbox}
+		[
+		colframe=blue!25,
+		colback=blue!10,
+		coltitle=blue!20!black,  
+		fonttitle=\bfseries,
+		adjusted title=Formula Or Theorem:
+		]
+		\begin{itemize}
+			\item \textbf{定义6.1.3} 设$ \hat{\theta_1} $，$ \hat{\theta_2} $是$ \theta $的两个无偏估计，如果对任意的$ \theta \in \Theta$有
+			\begin{equation*}
+				Var(\hat{\theta_1}) \leq Var(\hat{\theta_2})
+			\end{equation*}
+			且至少有一个$ \theta \in \Theta $使得上述不等号严格成立，则称$ \hat{\theta_1} $比$ \hat{\theta_2} $有效
+			\item A statistic $ \hat{\theta_1} $ is said to be a \textbf{more efficient unbiased estimator} of the parameter $ \theta $ than the statistic $ \hat{\theta_2} $ if \\
+			(1) $ \hat{\theta_1} $ and $ \hat{\theta_2} $ are both unbiased estimators of $ \theta $ \\
+			(2) the variance of the sampling distribution of the first estimator is no larger than that of the second and is smallar for at least one value of $ \theta $
+		\end{itemize}
+	\end{tcolorbox}
+	\noindent
+	8.5 \quad \textbf{C} \\
+	因为$ X \sim U(0, \theta) $，写出总体的分布函数以及密度函数
+	\begin{equation*}
+		F(x) = 
+		\begin{cases}
+			0, & x<0 \\
+			\frac{x}{\theta} , & 0 \leq x < \theta \\
+			1, & x \geq \theta
+		\end{cases}
+		\quad , \quad 
+		p(x) = 
+		\begin{cases}
+			\frac{1}{\theta} , & 0 \leq x \leq \theta \\
+			0 , & others
+		\end{cases}
+	\end{equation*}
+	求出$ x_{(1)} $的密度函数，根据\textbf{定理5.3.3}
+	\begin{equation*}
+		p_1(x) = n\cdot (1-F(x))^{n-1}p(x) = n\left(1-\frac{x}{\theta}\right)^{n-1} \frac{1}{\theta}
+	\end{equation*}
+	求出$ E(x_{(1)}) $
+	\begin{equation*}
+		\begin{split}
+			E(x_{(1)}) &= \frac{n}{\theta} \int_{0}^{\theta} x \left(1 - \frac{x}{\theta}\right)^{n-1} dx = \theta n \int_{0}^{\theta} \frac{x}{\theta} \cdot \left(1 - \frac{x}{\theta}\right)^{n-1} d \left(\frac{x}{\theta}\right) \\
+			&= \theta n \int_{0}^{1} t(1-t)^{n-1}dt = \theta n \frac{\Gamma(2)\Gamma(n)}{\Gamma(n+2)} = \frac{\theta}{n+1} \qquad \textbf{[附录I]}
+		\end{split}
+	\end{equation*}
+	求出$ Var(x_{(1)}) $
+	\begin{equation*}
+		\begin{split}
+			E(x_{(1)}^2) &= \frac{n}{\theta} \int_{0}^{\theta} x^2 \left(1 - \frac{x}{\theta}\right)^{n-1} dx = \theta^2 n \int_{0}^{\theta} \left(\frac{x}{\theta}\right)^2 \cdot \left(1 - \frac{x}{\theta}\right)^{n-1} d \left(\frac{x}{\theta}\right) \\
+			&= \theta^2 n \int_{0}^{1} t^2 (1-t)^{n-1}dt = \theta^2 n \frac{\Gamma(3)\Gamma(n)}{\Gamma(n+3)} = \frac{2\theta^2}{(n+2)(n+1)}
+		\end{split}
+	\end{equation*}
+	\begin{equation*}
+		Var(x_{(1)}) = E(x_{(1)}^2) - E(x_{(1)})^2 = \frac{n\theta^2}{(n+2)(n+1)^2}
+	\end{equation*}
+	求出$ x_{(n)} $的密度函数，根据\textbf{定理5.3.3}
+	\begin{equation*}
+		p_n(x) = n \cdot (F(x))^{n-1} p(x) = n \left(\frac{x}{\theta}\right)^{n-1} \frac{1}{\theta}
+	\end{equation*}
+	求出$ E(x_{(n)}) $
+	\begin{equation*}
+		\begin{split}
+			E(x_{(n)}) &= \frac{n}{\theta} \int_{0}^{\theta} x\left(\frac{x}{\theta}\right)^{n-1}dx = \theta n \int_{0}^{\theta} \left(\frac{x}{\theta}\right)^{n} d\left(\frac{x}{\theta}\right) \\
+			&= \theta n \int_{0}^{1} t^n (1-t)^0 dt = \theta n \frac{\Gamma(n+1)\Gamma(1)}{\Gamma(n+2)} = \frac{n \theta}{n + 1}
+		\end{split}
+	\end{equation*}
+	求出$ Var(x_{(n)}) $
+	\begin{equation*}
+		\begin{split}
+			E(x_{(n)}^2) &= \frac{n}{\theta} \int_{0}^{\theta} x^2 \left(\frac{x}{\theta}\right)^{n-1}dx = \theta^2 n \int_{0}^{\theta} \left(\frac{x}{\theta}\right)^{n+1} d\left(\frac{x}{\theta}\right) \\
+			&= \theta^2 n \int_{0}^{1} t^{n+1}(1-t)^0 dt = \theta^2 n \frac{\Gamma(n+2)\Gamma(1)}{\Gamma(n+3)} = \frac{\theta^2 n}{n+2}
+		\end{split}
+	\end{equation*}
+	\begin{equation*}
+		Var(x_{(n)}) = E(x_{(n)}^2) - E(x_{n})^2 = \frac{n\theta^2}{(n+2)(n+1)^2}
+	\end{equation*}
+	求$ E(\hat{\theta_1}) $ 与 $ E(\hat{\theta_2}) $
+	\begin{equation*}
+		\begin{split}
+			E(\hat{\theta_1}) &= \frac{n+1}{n} \cdot \frac{n\theta}{n+1} = \theta \\
+			&\\
+			E(\hat{\theta_2}) &= (n+1) \cdot \frac{\theta}{n+1} = \theta
+		\end{split}
+	\end{equation*}
+	所以$ \hat{\theta_1} $ 与 $ \hat{\theta_2} $ 都是 $ \theta $的无偏估计，再求$ Var(\hat{\theta_1}) $和$ Var(\hat{\theta_2}) $
+	\begin{equation*}
+		\begin{split}
+			Var(\hat{\theta_1}) &= \left(\frac{n+1}{n}\right)^2 \cdot \frac{n\theta^2}{(n+2)(n+1)^2} = \frac{\theta^2}{n+2} \\
+			\\
+			Var(\hat{\theta_2}) &= (n+1)^2 \cdot \frac{n\theta^2}{(n+2)(n+1)^2} = \frac{n\theta^2}{n+2}
+		\end{split}
+	\end{equation*}
+	显然$ Var(\hat{\theta_1}) < Var(\hat{\theta_2})$，所以$ \hat{\theta_1} $更有效 \\ \\
+	8.6 \quad \textbf{D} \\
+	由\textbf{定理5.4.1}
+	\begin{equation*}
+		\bar{x} \sim N(0, \sigma^2 / n) \quad \Rightarrow \quad \frac{\bar{x}}{\sigma / \sqrt{n}} \sim N(0, 1)
+	\end{equation*}
+	即有
+	\begin{equation*}
+		\left(\frac{\bar{x}}{\sigma^2 / \sqrt{n}}\right)^2 \sim \chi^2(1)
+	\end{equation*}
+	所以
+	\begin{equation*}
+		E(\bar{x}^2) = \frac{n}{\sigma^2}
+	\end{equation*}
+	由\textbf{定理5.4.1}
+	\begin{equation*}
+		\frac{x_n}{\sigma} \sim N(0, 1) \quad \Rightarrow \quad \left(\frac{x_n}{\sigma}\right)^2 \sim \chi^2(1)
+	\end{equation*}
+	所以
+	\begin{equation*}
+		E(x_n) = \sigma^2 \quad , \quad Var(x_n) = 2 \sigma^4
+	\end{equation*}
+	由\textbf{定理5.4.1}
+	\begin{equation*}
+		\frac{(n-1)s^2}{\sigma^2} \sim \chi^2(n-1)
+	\end{equation*}
+	所以
+	\begin{equation*}
+		E(s^2) = \sigma^2 \quad , \quad Var(s^2) = \frac{2 \sigma^4}{n-1}
+	\end{equation*}
+	由\textbf{定理5.4.1}
+	\begin{equation*}
+		\frac{x_i}{\sigma} \sim N(0, 1) \quad \Rightarrow \quad \left(\frac{x_i}{\sigma}\right)^2 \sim \chi^2(1)
+	\end{equation*}
+	即有
+	\begin{equation*}
+		\sum\limits_{i=1}^{n} \left(\frac{x_i}{\sigma}\right)^2 \sim \chi^2(n)
+	\end{equation*}
+	所以
+	\begin{equation*}
+		E\left(\frac{1}{n} \sum\limits_{i=1}^{n} x_i^2 \right) = \sigma^2 \quad , \quad Var\left(\frac{1}{n} \sum\limits_{i=1}^{n} x_i^2 \right) = \frac{2 \sigma^4}{n}
+	\end{equation*}
+	因此$ \sum\limits_{i=1}^{n} x_i^2 / n $是最有效的无偏估计量 \\ \\
+	8.7 \quad \textbf{D} \\
+	容易知道
+	\begin{equation*}
+		T \sim N((4a+9b)\mu, 4a^2+9b^2)
+	\end{equation*}
+	因为$ T $是$ \mu $的无偏估计，所以
+	\begin{equation*}
+		4a + 9b = 1
+	\end{equation*}
+	当$ 4a^2+9b^2 $最小时，$ T $最有效，带入即可知道$ a = 4/25, b= 1/ 25 $ \\ \\
+	8.8 \quad \textbf{B} \\
+	请读者验证
+	\newpage
+	\section{区间估计作业}
+	\begin{tcolorbox}
+		[
+		colframe=blue!25,
+		colback=blue!10,
+		coltitle=blue!20!black,  
+		fonttitle=\bfseries,
+		adjusted title=Formula Or Theorem:
+		]
+		\begin{itemize}
+			\item \textbf{定义6.6.1(P300)} 设$ \theta $是总体的一个参数，其参数空间为$ \Theta $，$ x_1, x_2, \cdots, x_n $是来自该总体的样本，对给定的一个$ \alpha (0 < \alpha < 1)$，假设有两个统计量$ \hat{\theta_L} = \hat{\theta_L}(x_1, x_2, \cdots, x_n) $和$ \hat{\theta_U} = \hat{\theta_U}(x_1, x_2, \cdots, x_n) $，若对任意的$ \theta \in \Theta $，有
+			\begin{equation*}
+				P_{\theta} (\hat{\theta_L} \leq \theta \leq \hat{\theta_U}) \geq 1 - \alpha 
+			\end{equation*}
+			则称随机区间$ [\hat{\theta_L}, \hat{\theta_U}] $为$\theta$的\textbf{置信水平为$ 1-\alpha $的置信区间}，$ \hat{\theta_L} $和$ \hat{\theta_U} $分别称为$\theta$的\textbf{置信下限}和\textbf{置信上限}
+			\item \textbf{Large sample confidence interval for $ \mu $ ($ \sigma $ konwn)} 
+			\begin{equation*}
+				\bar{x} - u_{1 - \alpha / 2} \cdot \frac{\sigma}{\sqrt{n}} < \mu < \bar{x} + u_{1 - \alpha / 2} \cdot \frac{\sigma}{\sqrt{n}}
+			\end{equation*}
+		\end{itemize}
+	\end{tcolorbox}
+	\noindent
+	9.1 \quad \textbf{A} \\
+	由题意得
+	\begin{equation*}
+		\begin{cases}
+			\bar{x} - u_{1 - \alpha / 2} \cdot \frac{\sigma}{\sqrt{n}} &= 43.88 \\
+			\bar{x} + u_{1 - \alpha / 2} \cdot \frac{\sigma}{\sqrt{n}} &= 46.52
+		\end{cases}
+	\end{equation*}
+	消去$ \bar{x} $
+	\begin{equation*}
+		1.6 u_{1 - \alpha / 2} = 2.64 \quad \Rightarrow \quad u_{1 - \alpha / 2} = 1.65
+	\end{equation*}
+	即得
+	\begin{equation*}
+		\Phi(1.65) = 0.9505 = 1 - \frac{\alpha}{2} \quad \Rightarrow \quad \alpha = 0.10
+	\end{equation*}
+	置信水平$ 1 - \alpha = 0.90 $ \\ \\
+	9.2 \quad \textbf{C} \\
+	由题意得
+	\begin{equation*}
+		E = u_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} = u_{0.975}\cdot\frac{4}{\sqrt{n}} < 2
+	\end{equation*}
+	即得
+	\begin{equation*}
+		\sqrt{n} \geq 2u_{0.975} \quad \Rightarrow \quad n \geq 16
+	\end{equation*} \\
+	9.3 \quad \textbf{B} \\
+	由题意得
+	\begin{equation*}
+		E = u_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} = u_{0.975}\frac{0.3}{\sqrt{15}}
+	\end{equation*}
+	置信区间为
+	\begin{equation*}
+		I = [\bar{x}-E, \bar{x}+E] = [2.88-E, 2.88+E]
+	\end{equation*}
+	9.4 \quad \textbf{B} \\
+	请读者验证
+	\newpage
+	\section{区间估计第二次作业} 
+	\begin{tcolorbox}
+		[
+		colframe=blue!25,
+		colback=blue!10,
+		coltitle=blue!20!black,  
+		fonttitle=\bfseries,
+		adjusted title=Formula Or Theorem:
+		]
+		\begin{itemize}
+			\item \textbf{Small sample confidence interval for $ \mu $ of normal population($\sigma$ unknown)}
+			\begin{equation*}
+				\bar{x} - t_{1-\alpha/2} \cdot \frac{s}{\sqrt{n}} < \mu < \bar{x} + t_{1-\alpha/2} \cdot \frac{s}{\sqrt{n}}
+			\end{equation*}
+			\item \textbf{Confidence interval of $ \sigma^2 $ when $ \mu $ unknown(P305)} 
+			\begin{equation*}
+				\frac{(n-1)s^2}{\chi_{1-\alpha/2}^{2}}< \sigma^2 < \frac{(n-1)s^2}{\chi_{\alpha/2}^{2}}
+			\end{equation*}
+		\end{itemize}
+	\end{tcolorbox}
+	\noindent
+	10.1 \quad \textbf{D} \\
+	$\sigma$未知，考虑使用$ \sqrt{n} (\bar{x} - \mu) / s $ 作为枢轴量，$\mu$的置信区间为
+	\begin{equation*}
+		[\bar{x} - t_{1-\alpha/2} \cdot \frac{s}{\sqrt{n}},\quad \bar{x} + t_{1-\alpha/2} \cdot \frac{s}{\sqrt{n}}]
+	\end{equation*}
+	所以$ e^{\mu} $的置信区间为
+	\begin{equation*}
+		\left[e^{\bar{x} - t_{1-\alpha/2} \cdot \frac{s}{\sqrt{n}}}, \quad e^{\bar{x} + t_{1-\alpha/2} \cdot \frac{s}{\sqrt{n}}}\right]
+	\end{equation*}
+	\\
+	10.2 \quad \textbf{A} \\
+	已知$ lnX \sim N(\mu, 1) $，\textbf{断言(*)}$ E(X) = e^{\mu + \frac{1}{2}} $，所以可以考虑$\mu$的置信区间($\sigma$已知) \\ \\
+	记$ Y = lnX \sim N(\mu, 1) $，则
+	\begin{equation*}
+		P\left(\bigg|\frac{\bar{y}-\mu}{\sigma/\sqrt{n}}\bigg| < u_{1-\alpha/2} \right) = 1 - \alpha
+	\end{equation*}
+	即$\mu$的置信区间为
+	\begin{equation*}
+		\bar{y} - u_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} < \mu < \bar{y} + u_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
+	\end{equation*}
+	其中$ \bar{y} = 0 $， $ u_{0.975} = 1.96 $，$ \sigma = 1 $，$ n = 4 $，则
+	\begin{equation*}
+		-0.98 < \mu < 0.98
+	\end{equation*}
+	所以
+	\begin{equation*}
+		e^{-0.48} < E(X) < e^{1.48}
+	\end{equation*}
+	\textbf{证明(*)处的一个结论(P115 习题2.6.13)} 设随机变量$ X \sim N(\mu, \sigma^2) $，求$ Y = e^X $的数学期望与方差 \\
+	求出$ Y $的分布(Y > 0)
+	\begin{equation*}
+		F_Y(y) = P(Y \leq y) = P(e^X \leq y) = P(X \leq lny) = F_X(lny)
+	\end{equation*}
+	所以
+	\begin{equation*}
+		p_y(y) = \frac{d}{dy}F_Y(y) = \frac{1}{y} \cdot \frac{d}{dy}F_X(lny) = \frac{1}{\sqrt{2\pi}\sigma} = \frac{1}{\sqrt{2\pi}\sigma y} e^{-\frac{(lny-\mu)^2}{2\sigma^2}} \qquad (y > 0)
+	\end{equation*}
+	求$ E(Y) $
+	\begin{equation*}
+		E(Y) = \frac{1}{\sqrt{2\pi}\sigma} \int_{0}^{+\infty} e^{-\frac{(lny-\mu)^2}{2\sigma^2}} dy
+	\end{equation*}
+	令$ (lny - \mu) / \sigma = t $，得到
+	\begin{equation*}
+		\begin{split}
+			E(Y) &= \frac{1}{\sqrt{2\pi}\sigma} \int_{-\infty}^{+\infty} e^{-\frac{t^2}{2}} \cdot e^{\sigma t + \mu}\sigma dt = \frac{e^{\mu}}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} e^{-\frac{1}{2}(t^2-2\sigma t)} dt \\
+			&= e^{\mu + \frac{1}{2} \sigma^2} \cdot \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} e^{-\frac{(t-\sigma)^2}{2}}dt = e^{\mu + \frac{1}{2}\sigma^2} 
+		\end{split}
+	\end{equation*}
+	求$ Var(X) $
+	\begin{equation*}
+		\begin{split}
+			E(Y^2) &= \frac{1}{\sqrt{2\pi}\sigma} \int_{0}^{+\infty} y e^{-\frac{(lny - \mu)^2}{2\sigma^2}}dy = e^{2\mu + 2\sigma^2} \cdot \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} e^{-\frac{(t-2\sigma)^2}{2}}dt \\
+			&= e^{2\mu + 2\sigma^2} \\
+			& \\
+			Var(Y) &= E(Y^2) -E(Y)^2 = e^{2\mu + \sigma^2} (e^{\sigma^2} - 1)
+		\end{split}
+	\end{equation*}
+	\textbf{题目中}$ Y = lnX \sim N(\mu, 1) $，所以$ X = e^{Y} $，则$ E(X) = e^{\mu + \frac{1}{2}} $
+	\\ \\
+	10.3 \quad \textbf{C} \\
+	显然，读者自证 \\ \\
+	10.4 \quad \textbf{B} \\
+	$ \mu $未知，考虑使用$ (n-1)s^/\sigma^2 $作为枢轴量，$\sigma^2$的置信区间为
+	\begin{equation*}
+		\frac{(n-1)s^2}{\chi_{1-\alpha/2}^{2}}< \sigma^2 < \frac{(n-1)s^2}{\chi_{\alpha/2}^{2}}
+	\end{equation*}
+	带入$ n = 9 $，$ s^2 = 11 $，$ \alpha = 0.5 $即可 \\
+	\\
+	\newpage
+	\section{附录}
+	\noindent
+	\textbf{\large I. $ \Gamma $函数和B函数}(P102 - P105) \\
+	\begin{equation*}
+		\begin{split}
+			\Gamma(\alpha) &= \int_{0}^{+\infty} x^{\alpha - 1}e^{-x}dx \\
+			& \\
+			B(a, b) &= \int_{0}^{1} x^{a-1}(1-x)^{b-1}dx = \frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}
+		\end{split}
+	\end{equation*} \\
+	\textbf{\large II. 区间估计}
+	\begin{table}[htbp!]
+		\centering
+		\renewcommand\arraystretch{1.8}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			\multirow{2}{*}{点估计} & \multirow{2}{*}{总体分布} & \multirow{2}{*}{样本容量} & \multicolumn{2}{|c|}{$\sigma$ 未知} & \multicolumn{2}{|c|}{$\sigma$已知} \\
+			\cline{4-7}
+			& & & 统计量 & 区间 & 统计量 & 区间 \\ \hline
+			\multirow{4}{*}{总体均值$\mu$} & \multirow{2}{*}{正态分布} & {小样本 ($ n < 30 $)} & $ t = \frac{\bar{x} - \mu}{s/\sqrt{n}} $ & $ \bar{x} \pm t_{\alpha/2} \cdot \frac{s}{\sqrt{n}} $ & \multirow{3}{*}{$ z=\frac{\bar{x}-\mu}{\sigma / \sqrt{n}} $} & \multirow{3}{*}{$ \bar{x} \pm z_{\alpha / 2} \cdot \frac{\sigma}{\sqrt{n}} $} \\
+			\cline{3-5}
+			& & 大样本($ n \geq 30 $) & \multirow{2}{*}{$ z= \frac{\bar{x}-\mu}{s/\sqrt{n}} $} & \multirow{2}{*}{$\bar{x} \pm z_{\alpha/2} \cdot \frac{s}{\sqrt{n}}$} & & \\
+			\cline{2-3}
+			 & \multirow{2}{*}{非正态分布} & 大样本($ n \geq 30 $) & & & & \\
+			\cline{3-7}
+			 & & 小样本($ n < 30 $) & \multicolumn{4}{|c|}{具体分布未知} \\
+			\cline{1-7} 
+			\multirow{2}{*}{总体方差$ \sigma^2 $} & \multirow{2}{*}{正态分布} & \multirow{2}{*}{无要求} & $ \chi^2 = \frac{(n-1)s^2}{\sigma^2} $ & \multicolumn{3}{|c|}{$ \left[ \frac{(n-1)s^2}{\chi_{\alpha / 2}^2(n-1)} , \frac{(n-1)s^2}{\chi_{1-\alpha / 2}^2(n-1)}\right] $\quad ($ \mu $未知)} \\
+			\cline{4-7}
+			& & & $ z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} $ & \multicolumn{3}{|c|}{$ \sigma > \frac{(\bar{x} - \mu)\sqrt{n}}{z_{\alpha / 2}} $ \quad ($\mu$已知)} \\
+			\cline{1-7}
+		\end{tabular}
+	\end{table}
+\end{document}
