@@ -1,4 +1,8 @@
 # Mathematical_Statistics
-Mathematical_Statistics Notes  
+Mathematical Statistics Notes  
 update May 15  
 cg system  
+  
+Mathematical Statistics Notes  
+update June 20
+cg system
